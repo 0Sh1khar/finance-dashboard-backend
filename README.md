@@ -78,18 +78,57 @@ Swagger Docs: [https://findb.onrender.com/docs](https://findb.onrender.com/docs)
 ## How to Test (Swagger UI)
 
 1. Open [https://findb.onrender.com/docs](https://findb.onrender.com/docs)
-2. Register a user via `POST /auth/register`:
+
+2. Register a user via `POST /auth/register`.
+   Use any of the following test accounts:
+
+   **Analyst account:**
 ```json
-{
-  "email": "admin@test.com",
-  "password": "test123",
-  "role": "admin"
-}
+   {
+     "name": "Shikhar",
+     "email": "shikhar@gmail.com",
+     "password": "123456",
+     "role": "analyst"
+   }
 ```
-3. Login via `POST /auth/login` with the same credentials → copy the `access_token` from the response
-4. Click the **Authorize 🔒** button at the top of the Swagger page
-5. Paste the token as: `Bearer <your_token>`
-6. Now all protected endpoints are unlocked — test away!
+
+   **Admin account:**
+```json
+   {
+     "name": "Admin",
+     "email": "admin@test.com",
+     "password": "123456",
+     "role": "admin"
+   }
+```
+
+   **Viewer account:**
+```json
+   {
+     "name": "Viewer",
+     "email": "viewer@test.com",
+     "password": "123456",
+     "role": "viewer"
+   }
+```
+
+3. Login via `POST /auth/login`:
+```json
+   {
+     "email": "shikhar@gmail.com",
+     "password": "123456"
+   }
+```
+
+4. Copy the `access_token` from the login response
+
+5. Click the **Authorize 🔒** button at the top of the Swagger page
+
+6. Paste the token as: `Bearer <your_token>`
+
+7. Now all protected endpoints are unlocked — test away!
+
+> 💡 Tip: To test role-based restrictions, log in with different accounts and try actions that should be blocked. For example, a Viewer trying `POST /records/` should get a 403 Forbidden response.
 
 ---
 
